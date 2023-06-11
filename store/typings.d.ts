@@ -9,7 +9,7 @@ interface Column {
   tasks: Task[];
 }
 
-interface Todo {
+interface Task {
   $id: string;
   $createdAt: string;
   title: string;
