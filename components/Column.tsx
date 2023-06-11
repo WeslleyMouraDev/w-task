@@ -1,5 +1,6 @@
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import TaskCard from "./TaskCard";
 
 type Props = {
   id: TypedColumn;
