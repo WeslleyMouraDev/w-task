@@ -71,8 +71,8 @@
 <stop offset="1" stop-color="white" stop-opacity="0"/>
 </linearGradient>
 <linearGradient id="paint8_linear_1_66" x1="1415.54" y1="440.531" x2="1362.92" y2="-4.1189" gradientUnits="userSpaceOnUse">
-<stop offset="0.3125" stop-color="#1FD0D9"/>
-<stop offset="1" stop-color="#2C0261"/>
+<stop stop-color="#2C0261"/>
+<stop offset="1" stop-color="#1FD0D9"/>
 </linearGradient>
 </defs>
 </svg>
