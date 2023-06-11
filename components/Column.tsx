@@ -13,7 +13,7 @@ const idToColumnText: {
   [key in TypedColumn]: string;
 } = {
   task: "A Fazer",
-  inprogress: "Em Progresso",
+  inprogress: "Em Andamento",
   done: "Concluído",
 };
 
