@@ -13,8 +13,8 @@ interface Task {
   $id: string;
   $createdAt: string;
   title: string;
-  status: string;
-  image?: string;
+  status: TypedColumn;
+  image?: Image;
 }
 
 interface Image {
