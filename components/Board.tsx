@@ -1,10 +1,10 @@
-"use client";
-import { useBoardStore } from "@/store/BoardStore";
-import { useEffect } from "react";
-import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
-import Column from "./Column";
-import { start } from "repl";
-import { doesNotMatch } from "assert";
+'use client';
+import { useBoardStore } from '@/store/BoardStore';
+import { useEffect } from 'react';
+import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
+import Column from './Column';
+import { start } from 'repl';
+import { doesNotMatch } from 'assert';
 
 function Board() {
   const [board, getBoard, setBoardState, updateTaskInDB] = useBoardStore(
@@ -27,7 +27,7 @@ function Board() {
     if (!destination) return;
 
     // Lida com arrastar as colunas
-    if (type === "column") {
+    if (type === 'column') {
       const entries = Array.from(board.columns.entries());
       const [removed] = entries.splice(source.index, 1);
       entries.splice(destination.index, 0, removed);

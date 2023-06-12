@@ -1,16 +1,20 @@
-import { databases, storage } from "@/appwrite";
-import { getTasksGroupedByColumn } from "@/lib/getTasksGroupedByColumn";
-import { data } from "autoprefixer";
-import { create } from "zustand";
+import { databases, storage } from '@/appwrite';
+import { getTasksGroupedByColumn } from '@/lib/getTasksGroupedByColumn';
+import { data } from 'autoprefixer';
+import { create } from 'zustand';
 
 interface BoardState {
   board: Board;
   getBoard: () => void;
   setBoardState: (board: Board) => void;
   updateTaskInDB: (task: Task, columnId: TypedColumn) => void;
+  newTaskInput: string;
+  newTaskType: TypedColumn;
 
   searchString: string;
   setSearchString: (searchString: string) => void;
+  setNewTaskInput: (input: string) => void;
+  setNewTaskType: (columnId: TypedColumn) => void;
 
   deleteTask: (taskIndex: number, taskId: Task, id: TypedColumn) => void;
 }
@@ -19,7 +23,9 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   board: {
     columns: new Map<TypedColumn, Column>(),
   },
-  searchString: "",
+  searchString: '',
+  newTaskInput: '',
+  newTaskType: 'task',
   setSearchString: (searchString) => set({ searchString }),
 
   getBoard: async () => {
@@ -35,7 +41,7 @@ export const useBoardStore = create<BoardState>((set, get) => ({
     // Deleta taskId da newColumns
     newColumns.get(id)?.tasks.splice(taskIndex, 1);
 
-    set({ board: { columns: newColumns } })
+    set({ board: { columns: newColumns } });
 
     if (task.image) {
       await storage.deleteFile(task.image.bucketId, task.image.fileId);
@@ -45,8 +51,11 @@ export const useBoardStore = create<BoardState>((set, get) => ({
       process.env.NEXT_PUBLIC_DATABASE_ID!,
       process.env.NEXT_PUBLIC_TASKS_COLLECTION_ID!,
       task.$id
-    )
+    );
   },
+
+  setNewTaskInput: (input: string) => set({ newTaskInput: input }),
+  setNewTaskType: (columnId: TypedColumn) => set({ newTaskType: columnId }),
 
   updateTaskInDB: async (task, columnId) => {
     await databases.updateDocument(

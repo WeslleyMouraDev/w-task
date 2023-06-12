@@ -1,10 +1,16 @@
-"use client";
-import { useState, Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { DefaultDeserializer } from "v8";
-import { useModalStore } from "@/store/ModalStore";
+'use client';
+import { useState, Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { DefaultDeserializer } from 'v8';
+import { useModalStore } from '@/store/ModalStore';
+import { useBoardStore } from '@/store/BoardStore';
+import TaskTypeRadioGroup from './TaskTypeRadioGroup';
 
 function Modal() {
+  const [newTaskInput, setNewTaskInput] = useBoardStore((state) => [
+    state.newTaskInput,
+    state.setNewTaskInput,
+  ]);
   const [isOpen, closeModal] = useModalStore((state) => [
     state.isOpen,
     state.closeModal,
@@ -45,7 +51,7 @@ function Modal() {
                   Adicionar Tarefa
                 </Dialog.Title>
 
-                {/* <div className="mt-2">
+                <div className="mt-2">
                   <input
                     type="text"
                     value={newTaskInput}
@@ -53,7 +59,8 @@ function Modal() {
                     placeholder="Coloque sua tarefa aqui..."
                     className="w-full border border-gray-300 rounded-md outline-none p-5"
                   />
-                </div> */}
+                </div>
+                <TaskTypeRadioGroup />
               </Dialog.Panel>
             </Transition.Child>
           </div>
