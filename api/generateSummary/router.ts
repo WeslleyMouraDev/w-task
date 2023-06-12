@@ -20,9 +20,9 @@ export async function POST(request: Request) {
       },
       {
         role: "user",
-        content: `Olá, forneça um resumo das tarefas a seguir. Conte quantas tarefas há em cada categoria
-        como A Fazer, Em Andamento e Concluídas, informe a melhor manera de completar todas e diga ao usuário para ter um dia produtivo! Aqui estão os dados:
-        ${JSON.stringify(tasks)}`,
+        content: `Olá, forneça um resumo das tarefas a seguir. Conte quantas tarefas há em cada categoria como A Fazer, Em Andamento e Concluídas,
+        informe a melhor manera de completar todas e diga ao usuário para ter um dia produtivo!
+        Aqui estão os dados: ${JSON.stringify(tasks)}`,
       },
     ],
   });
