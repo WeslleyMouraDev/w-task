@@ -14,7 +14,7 @@ const types = [
   {
     id: 'inprogress',
     name: 'Em Progresso',
-    description: 'Uma tarefa que ja está sendo trabalhada',
+    description: 'Uma tarefa que já está sendo trabalhada',
     color: 'bg-yellow-500',
   },
   {
