@@ -19,7 +19,7 @@ const types = [
   },
   {
     id: 'done',
-    name: 'Finalizada',
+    name: 'Concluída',
     description: 'Uma tarefa que já está concluída',
     color: 'bg-green-500',
   },
