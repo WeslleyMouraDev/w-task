@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "w-task",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,15 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
     "@types/node": "20.2.6",
     "@types/react": "18.2.10",
     "@types/react-dom": "18.2.4",
     "appwrite": "^11.0.0",
     "autoprefixer": "10.4.14",
+    "encoding": "^0.1.13",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
-    "next": "13.4.4",
+    "next": "13.4",
+    "openai": "^3.2.1",
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-avatar": "^5.0.3",

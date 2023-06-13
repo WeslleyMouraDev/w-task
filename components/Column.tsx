@@ -1,7 +1,8 @@
-import { PlusCircleIcon } from "@heroicons/react/24/solid";
-import { Draggable, Droppable } from "react-beautiful-dnd";
-import TaskCard from "./TaskCard";
-import { useBoardStore } from "@/store/BoardStore";
+import { PlusCircleIcon } from '@heroicons/react/24/solid';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
+import TaskCard from './TaskCard';
+import { useBoardStore } from '@/store/BoardStore';
+import { useModalStore } from '@/store/ModalStore';
 
 type Props = {
   id: TypedColumn;
@@ -12,13 +13,22 @@ type Props = {
 const idToColumnText: {
   [key in TypedColumn]: string;
 } = {
-  task: "A Fazer",
-  inprogress: "Em Progresso",
-  done: "Concluído",
+  task: 'A Fazer',
+  inprogress: 'Em Andamento',
+  done: 'Concluído',
 };
 
 function Column({ id, tasks, index }: Props) {
-  const [searchString] = useBoardStore((state) => [state.searchString]);
+  const [searchString, setNewTaskType] = useBoardStore((state) => [
+    state.searchString,
+    state.setNewTaskType,
+  ]);
+  const openModal = useModalStore((state) => state.openModal);
+
+  const handleAddTask = () => {
+    setNewTaskType(id);
+    openModal();
+  };
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -34,7 +44,7 @@ function Column({ id, tasks, index }: Props) {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
                 className={`pb-2 rounded-2xl shadow-sm ${
-                  snapshot.isDraggingOver ? "bg-green-200" : "bg-white/50"
+                  snapshot.isDraggingOver ? 'bg-green-200' : 'bg-white/50'
                 }`}
               >
                 <h2 className="flex justify-between font-bold text-xl p-2">
@@ -83,7 +93,10 @@ function Column({ id, tasks, index }: Props) {
                   {provided.placeholder}
 
                   <div className="flex items-end justify-end p-2">
-                    <button className="text-green-500 hover:text-green-600">
+                    <button
+                      onClick={handleAddTask}
+                      className="text-green-500 hover:text-green-600"
+                    >
                       <PlusCircleIcon className="h-10 w-10" />
                     </button>
                   </div>

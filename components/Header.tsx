@@ -1,15 +1,40 @@
-"use client";
-import Image from "next/image";
-import React from "react";
-import { CpuChipIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import Avatar from "react-avatar";
-import { useBoardStore } from "@/store/BoardStore";
+'use client';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import {
+  ArrowTrendingUpIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+  CheckBadgeIcon,
+  CpuChipIcon,
+  MagnifyingGlassIcon,
+} from '@heroicons/react/24/solid';
+import Avatar from 'react-avatar';
+import { useBoardStore } from '@/store/BoardStore';
+import fetchSuggestion from '@/lib/fetchSuggestion';
 
 function Header() {
-  const [searchString, setSearchString] = useBoardStore((state) => [
+  const [board, searchString, setSearchString] = useBoardStore((state) => [
+    state.board,
     state.searchString,
     state.setSearchString,
-  ])
+  ]);
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [suggestion, setSuggestion] = useState<string>('');
+
+  useEffect(() => {
+    if (board.columns.size === 0) return;
+    setLoading(true);
+
+    const fetchSuggestionFunc = async () => {
+      const suggestion = await fetchSuggestion(board);
+      setSuggestion(suggestion);
+      setLoading(false);
+    };
+
+    // fetchSuggestionFunc(); // Não está funcionando atualmente
+  }, [board]);
+
   return (
     <header>
       <div className="flex flex-col md:flex-row items-center p-5 bg-gray-500/10 rounded-b-xl">
@@ -47,7 +72,7 @@ function Header() {
               placeholder="Pesquisar"
               className="flex-1 outline-none p-2"
               value={searchString}
-              onChange={e => setSearchString(e.target.value)}
+              onChange={(e) => setSearchString(e.target.value)}
             />
             <button type="submit" hidden>
               Pesquisar
@@ -55,14 +80,28 @@ function Header() {
           </form>
 
           {/* Avatar */}
-          <Avatar name="Weslley Moura" round size="50" color="#1FD0D9" />
+          <Avatar name="W Task" round size="50" color="#1FD0D9" />
         </div>
       </div>
 
       <div className="flex items-center justify-center px-5 py-2 md:py-5">
+        {/* Atualmente comentado porque a API não está recebendo o fetch */}
+        {/* <p className="flex items-center text-sm p-5 font-light pr-5 shadow-xl rounded-xl w-fit italic max-w-3xl text-[#096E73] bg-white">
+          <CpuChipIcon
+            className={`inline-block h-10 w-10 text-[#1FD0D9] mr-1
+          ${loading && 'animate-spin'}
+          `}
+          />
+          {suggestion && !loading
+            ? suggestion
+            : 'A inteligência GPT está organizando suas atividades de hoje...'}
+        </p> */}
+
+        {/* Menságem temporária enquanto descubro porque a API não está recebendo o fetch */}
         <p className="flex items-center text-sm p-5 font-light pr-5 shadow-xl rounded-xl w-fit italic max-w-3xl text-[#096E73] bg-white">
-          <CpuChipIcon className="inline-block h-10 w-10 text-[#1FD0D9] mr-1" />
-          A inteligência GPT está organizando suas atividades de hoje...
+          <CheckBadgeIcon className="inline-block h-10 w-10 text-[#1FD0D9] mr-1" />
+          Persista, acredite e faça acontecer. Grandes conquistas começam com
+          pequenos passos.
         </p>
       </div>
     </header>
