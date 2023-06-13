@@ -1,10 +1,16 @@
-"use client";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { CpuChipIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import Avatar from "react-avatar";
-import { useBoardStore } from "@/store/BoardStore";
-import fetchSuggestion from "@/lib/fetchSuggestion";
+'use client';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import {
+  ArrowTrendingUpIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+  CheckBadgeIcon,
+  CpuChipIcon,
+  MagnifyingGlassIcon,
+} from '@heroicons/react/24/solid';
+import Avatar from 'react-avatar';
+import { useBoardStore } from '@/store/BoardStore';
+import fetchSuggestion from '@/lib/fetchSuggestion';
 
 function Header() {
   const [board, searchString, setSearchString] = useBoardStore((state) => [
@@ -14,7 +20,7 @@ function Header() {
   ]);
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [suggestion, setSuggestion] = useState<string>("");
+  const [suggestion, setSuggestion] = useState<string>('');
 
   useEffect(() => {
     if (board.columns.size === 0) return;
@@ -26,7 +32,7 @@ function Header() {
       setLoading(false);
     };
 
-    fetchSuggestionFunc();
+    // fetchSuggestionFunc(); // Não está funcionando atualmente
   }, [board]);
 
   return (
@@ -74,20 +80,28 @@ function Header() {
           </form>
 
           {/* Avatar */}
-          <Avatar name="Weslley Moura" round size="50" color="#1FD0D9" />
+          <Avatar name="W Task" round size="50" color="#1FD0D9" />
         </div>
       </div>
 
       <div className="flex items-center justify-center px-5 py-2 md:py-5">
-        <p className="flex items-center text-sm p-5 font-light pr-5 shadow-xl rounded-xl w-fit italic max-w-3xl text-[#096E73] bg-white">
+        {/* Atualmente comentado porque a API não está recebendo o fetch */}
+        {/* <p className="flex items-center text-sm p-5 font-light pr-5 shadow-xl rounded-xl w-fit italic max-w-3xl text-[#096E73] bg-white">
           <CpuChipIcon
             className={`inline-block h-10 w-10 text-[#1FD0D9] mr-1
-          ${loading && "animate-spin"}
+          ${loading && 'animate-spin'}
           `}
           />
           {suggestion && !loading
             ? suggestion
-            : "A inteligência GPT está organizando suas atividades de hoje..."}
+            : 'A inteligência GPT está organizando suas atividades de hoje...'}
+        </p> */}
+
+        {/* Menságem temporária enquanto descubro porque a API não está recebendo o fetch */}
+        <p className="flex items-center text-sm p-5 font-light pr-5 shadow-xl rounded-xl w-fit italic max-w-3xl text-[#096E73] bg-white">
+          <CheckBadgeIcon className="inline-block h-10 w-10 text-[#1FD0D9] mr-1" />
+          Persista, acredite e faça acontecer. Grandes conquistas começam com
+          pequenos passos.
         </p>
       </div>
     </header>

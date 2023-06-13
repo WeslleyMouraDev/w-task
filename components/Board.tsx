@@ -40,8 +40,12 @@ function Board() {
 
     // Lida com arrastar os cards
     const columns = Array.from(board.columns);
+
     const startColIndex = columns[Number(source.droppableId)];
+    if (!startColIndex) return;
+
     const finishColIndex = columns[Number(destination.droppableId)];
+    if (!finishColIndex) return;
 
     const startCol: Column = {
       id: startColIndex[0],
